@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("aluno")
 public class AlunoEndpoint {
@@ -20,7 +22,7 @@ public class AlunoEndpoint {
             return new ResponseEntity<>(alunoService.pegarTodos(), HttpStatus.OK);
         }
 
-        @GetMapping(path = "/{id}")
+        @GetMapping(path = "{id}")
         public ResponseEntity<?> getById(@PathVariable Long id){
 
                 return new ResponseEntity<>(alunoService.pegarPorId(id), HttpStatus.OK);
@@ -32,15 +34,25 @@ public class AlunoEndpoint {
                 return new ResponseEntity<>(alunoService.criar(aluno), HttpStatus.CREATED);
         }
 
-        @PutMapping(path = "/{id}")
+        @PutMapping
         public ResponseEntity<?> up(@RequestBody Aluno aluno){
+
+                Optional<Aluno>  alunoEmpty = Optional.empty();
+
+                if(alunoService.pegarPorId(aluno.getId()) == alunoEmpty)
+                        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
                 return new ResponseEntity<>(alunoService.atualizar(aluno), HttpStatus.OK);
         }
 
 
-        @DeleteMapping(path = "/{id}")
+        @DeleteMapping(path = "{id}")
         public ResponseEntity<?> remove(@PathVariable Long id){
+
+                Optional<Aluno>  alunoEmpty = Optional.empty();
+
+                if(alunoService.pegarPorId(id) == alunoEmpty)
+                        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
                 return new ResponseEntity<>(alunoService.deletar(id), HttpStatus.OK);
         }
