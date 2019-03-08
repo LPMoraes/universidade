@@ -37,7 +37,7 @@ public class Curso implements Serializable {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
@@ -46,7 +46,7 @@ public class Curso implements Serializable {
         this.disciplinas = disciplinas;
     }
 
-    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     public List<Aluno> getAlunos() {
         return alunos;
     }
