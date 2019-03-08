@@ -15,7 +15,7 @@ public class Disciplina implements Serializable {
 
     private Long id;
     private String name;
-    private Date Inicio;
+    private Date dataInicio;
     private Curso curso;
     private List<Aluno> turma;
     private StatusEnum status;
@@ -48,14 +48,14 @@ public class Disciplina implements Serializable {
     }
 
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_inicio", nullable = false)
-    public Date getInicio() {
-        return Inicio;
+    //@Temporal(TemporalType.DATE)
+    //@Column(name = "data_inicio", nullable = true)
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setInicio(Date inicio) {
-        Inicio = inicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
     public void setCurso(Curso curso) {
