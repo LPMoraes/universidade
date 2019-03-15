@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,10 +17,18 @@ public class AlunoEndpoint {
         @Autowired
         AlunoService alunoService;
 
+        @GetMapping(path = "/actives")
+        public ResponseEntity<?> getAllActive(){
+
+                List<Aluno>  alunoList = alunoService.pegarTodosAlunosAtivos();
+
+            return new ResponseEntity<>(alunoList, HttpStatus.OK);
+        }
+
         @GetMapping
         public ResponseEntity<?> getAll(){
 
-            return new ResponseEntity<>(alunoService.pegarTodos(), HttpStatus.OK);
+                return new ResponseEntity<>(alunoService.pegarTodos(), HttpStatus.OK);
         }
 
         @GetMapping(path = "{id}")

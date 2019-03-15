@@ -1,15 +1,13 @@
 package br.com.universidade.model;
 
-import br.com.universidade.enums.StatusEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.List;
+
 
 @Data
 @Builder
@@ -17,18 +15,16 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "curso")
-public class Curso implements Serializable {
+public class Turma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    private String nome;
+    @Column(name = "aluno_id")
+    private Aluno aluno;
 
-    @Enumerated(EnumType.ORDINAL)
-    private StatusEnum status;
-
+    @Column(name = "disciplina_id")
+    private Disciplina disciplina;
 
 }

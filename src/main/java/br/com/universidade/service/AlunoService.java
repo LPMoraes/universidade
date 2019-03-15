@@ -14,6 +14,15 @@ public class AlunoService  {
     @Autowired
     AlunoRepository alunoRepository;
 
+
+
+    public List<Aluno> pegarTodosAlunosAtivos(){
+
+        List<Aluno> alunoList  = alunoRepository.encontrarTodosAlunosAtivos();
+        return alunoList;
+    }
+
+
     public List<Aluno> pegarTodos(){
          return (List<Aluno>) alunoRepository.findAll();
     }

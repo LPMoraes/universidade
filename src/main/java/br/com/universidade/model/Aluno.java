@@ -1,75 +1,38 @@
 package br.com.universidade.model;
 
 import br.com.universidade.enums.StatusEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "aluno")
 public class Aluno implements Serializable {
 
-
-    private Long id;
-    private String nome;
-    private Curso curso;
-    private List<Disciplina> turma;
-    private StatusEnum status;
-
-    public Aluno() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    @NotNull
+    private String nome;
 
     @OneToOne
-    @JoinColumn(name = "curso_id")
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "turma",
-            joinColumns = @JoinColumn(name = "aluno_id"),
-            inverseJoinColumns = @JoinColumn(name = "disciplina_id")
-    )
-    public List<Disciplina> getTurma() {
-        return turma;
-    }
-
-    public void setTurma(List<Disciplina> turma) {
-        this.turma = turma;
-    }
+    @JoinColumn//(name = "endereco_id", table = "aluno")//unique = true, nullable=false
+    private Endereco endereco;
 
     @Enumerated(EnumType.ORDINAL)
-    public StatusEnum getStatus() {
-        return status;
-    }
+    @NotNull
+    private StatusEnum status;
 
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
 }

@@ -2,91 +2,40 @@ package br.com.universidade.model;
 
 
 import br.com.universidade.enums.StatusEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "disciplina")
 public class Disciplina implements Serializable {
 
-    private Long id;
-    private String name;
-    private Date dataInicio;
-    private Curso curso;
-    private List<Aluno> turma;
-    private StatusEnum status;
-
-    public Disciplina() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Date dataInicio;
 
     @OneToOne
     @JoinColumn(name = "curso_id")
-    public Curso getCurso() {
-        return curso;
-    }
+    private Curso curso;
 
-
-    //@Temporal(TemporalType.DATE)
-    //@Column(name = "data_inicio", nullable = true)
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "turma",
-            joinColumns = @JoinColumn(name = "disciplina_id"),
-            inverseJoinColumns = @JoinColumn(name = "aluno_id")
-    )
-    public List<Aluno> getTurma() {
-        return turma;
-    }
-
-    public void setTurma(List<Aluno> turma) {
-        this.turma = turma;
-    }
+   // private List<Aluno> turma;
 
     @Enumerated(EnumType.ORDINAL)
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-
-
-
+    private StatusEnum status;
 
 }
